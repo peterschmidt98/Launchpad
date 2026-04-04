@@ -141,7 +141,7 @@ window.Chapter2 = {
               <button id="demo-send" class="bg-accent hover:bg-amber-500 text-white font-semibold px-6 py-3 rounded-lg transition-colors flex items-center gap-2">
                 Send <span>→</span>
               </button>
-              <span class="text-xs text-ink/40">Powered by Claude (Anthropic)</span>
+              <span class="text-xs text-ink/40">Simulated AI demo</span>
             </div>
             <div id="demo-response" class="hidden">
               <!-- Response appears here -->
@@ -221,20 +221,6 @@ window.Chapter2 = {
       async function handleSend() {
         const message = input.value.trim();
         if (!message) return;
-
-        // Check for API key
-        if (!window.LaunchpadAPI.hasApiKey()) {
-          errorDiv.innerHTML = `
-            <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 text-sm text-amber-800 fade-in">
-              You'll need an API key to try this. <button class="underline font-medium" id="demo-set-key">Set it up now →</button>
-            </div>
-          `;
-          errorDiv.classList.remove('hidden');
-          errorDiv.querySelector('#demo-set-key').addEventListener('click', () => {
-            window.LaunchpadApp.showApiKeyModal();
-          });
-          return;
-        }
 
         // Loading state
         sendBtn.disabled = true;

@@ -79,11 +79,10 @@ describe('LaunchpadApp', () => {
   });
 
   describe('Sidebar rendering', () => {
-    it('renders 6 chapter items plus API key button', () => {
+    it('renders 6 chapter items', () => {
       const nav = document.getElementById('chapter-list');
       const items = nav.querySelectorAll('.chapter-nav-item');
-      // 6 chapters + 1 API key button
-      assert.equal(items.length, 7);
+      assert.equal(items.length, 6);
     });
 
     it('shows lock icon for locked chapters', () => {
@@ -156,22 +155,6 @@ describe('LaunchpadApp', () => {
     });
   });
 
-  describe('API key modal', () => {
-    it('modal is shown on init when no API key is set', () => {
-      const modal = document.getElementById('api-key-modal');
-      assert.ok(modal.classList.contains('active'));
-    });
-
-    it('modal is not shown when API key exists', () => {
-      // Create a new env with key pre-set
-      const env2 = createTestEnv({ skipInit: true });
-      env2.window.LaunchpadAPI.setApiKey('sk-test');
-      env2.triggerInit();
-      const modal = env2.document.getElementById('api-key-modal');
-      assert.ok(!modal.classList.contains('active'));
-    });
-  });
-
   describe('Initial chapter selection', () => {
     it('starts on chapter 1 for fresh user', () => {
       const container = document.getElementById('chapter-container');
@@ -185,7 +168,6 @@ describe('LaunchpadApp', () => {
         1: 'complete', 2: 'not-started', 3: 'not-started',
         4: 'not-started', 5: 'not-started', 6: 'not-started',
       }));
-      env2.window.LaunchpadAPI.setApiKey('sk-test');
       env2.triggerInit();
       const container = env2.document.getElementById('chapter-container');
       assert.ok(container.textContent.includes('What is AI?'));
