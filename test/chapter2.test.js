@@ -201,11 +201,11 @@ describe('Chapter 2: What is AI?', () => {
   });
 
   describe('Coming soon chapters render after unlock', () => {
-    it('chapter 3 shows coming soon content', () => {
+    it('chapter 3 renders full content after unlock', () => {
       app.setChapterStatus(2, 'complete');
       app.navigateToChapter(3);
       assert.ok(container.textContent.includes('Your Core Toolkit'));
-      assert.ok(container.textContent.includes('Coming Soon'));
+      assert.ok(container.textContent.includes('Spreadsheets'));
     });
 
     it('chapter 4 shows coming soon content', () => {
