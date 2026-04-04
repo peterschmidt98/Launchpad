@@ -51,7 +51,7 @@ describe('Chapter 2: What is AI?', () => {
       const sendBtn = container.querySelector('#demo-send');
       assert.ok(textarea, 'Demo textarea should exist');
       assert.ok(sendBtn, 'Send button should exist');
-      assert.ok(container.textContent.includes('Powered by Claude'));
+      assert.ok(container.textContent.includes('Simulated AI demo'));
     });
   });
 
@@ -68,93 +68,32 @@ describe('Chapter 2: What is AI?', () => {
       assert.ok(responseDiv.classList.contains('hidden'));
     });
 
-    it('shows API key prompt when no key is set and user tries to send', () => {
-      window.LaunchpadAPI.removeApiKey();
-      const textarea = container.querySelector('#demo-input');
-      const btn = container.querySelector('#demo-send');
-      textarea.value = 'Hello AI';
-      btn.click();
-
-      const errorDiv = container.querySelector('#demo-error');
-      assert.ok(!errorDiv.classList.contains('hidden'));
-      assert.ok(errorDiv.textContent.includes('API key'));
-    });
-
-    it('calls API and displays response on successful send', async () => {
-      window.LaunchpadAPI.setApiKey('sk-test-key');
-      window.fetch = async () => ({
-        ok: true,
-        json: async () => ({ content: [{ text: 'AI is a technology that helps computers learn.' }] }),
-      });
-
+    it('displays mock response on send', async () => {
       const textarea = container.querySelector('#demo-input');
       const btn = container.querySelector('#demo-send');
       textarea.value = 'What is AI?';
       btn.click();
 
-      // Wait for async
+      // Wait for mock delay (uses immediateTimers so should be fast)
       await new Promise(resolve => setTimeout(resolve, 50));
 
       const responseDiv = container.querySelector('#demo-response');
       assert.ok(!responseDiv.classList.contains('hidden'), 'Response should be visible');
-      assert.ok(responseDiv.textContent.includes('AI is a technology'));
       assert.ok(responseDiv.textContent.includes('Claude says'));
     });
 
-    it('displays error message on API failure', async () => {
-      window.LaunchpadAPI.setApiKey('sk-test-key');
-      window.fetch = async () => ({
-        ok: false,
-        status: 500,
-        json: async () => ({}),
-      });
-
+    it('re-enables send button after response', async () => {
       const textarea = container.querySelector('#demo-input');
       const btn = container.querySelector('#demo-send');
       textarea.value = 'Hello';
       btn.click();
 
       await new Promise(resolve => setTimeout(resolve, 50));
-
-      const errorDiv = container.querySelector('#demo-error');
-      assert.ok(!errorDiv.classList.contains('hidden'), 'Error should be visible');
-      assert.ok(errorDiv.textContent.includes('something went wrong'));
-    });
-
-    it('re-enables send button after response', async () => {
-      window.LaunchpadAPI.setApiKey('sk-test-key');
-      window.fetch = async () => ({
-        ok: true,
-        json: async () => ({ content: [{ text: 'Response' }] }),
-      });
-
-      const textarea = container.querySelector('#demo-input');
-      const btn = container.querySelector('#demo-send');
-      textarea.value = 'Test';
-      btn.click();
-
-      await new Promise(resolve => setTimeout(resolve, 50));
       assert.equal(btn.disabled, false);
     });
 
-    it('escapes HTML in API responses to prevent XSS', async () => {
-      window.LaunchpadAPI.setApiKey('sk-test-key');
-      window.fetch = async () => ({
-        ok: true,
-        json: async () => ({ content: [{ text: '<script>alert("xss")</script>' }] }),
-      });
-
-      const textarea = container.querySelector('#demo-input');
-      const btn = container.querySelector('#demo-send');
-      textarea.value = 'Test';
-      btn.click();
-
-      await new Promise(resolve => setTimeout(resolve, 50));
-
-      const responseDiv = container.querySelector('#demo-response');
-      // Should show escaped HTML, not execute it
-      assert.ok(!responseDiv.innerHTML.includes('<script>'));
-      assert.ok(responseDiv.textContent.includes('<script>'));
+    it('shows simulated demo label', () => {
+      assert.ok(container.textContent.includes('Simulated AI demo'));
     });
   });
 

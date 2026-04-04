@@ -295,11 +295,6 @@ body {
   letter-spacing: 0.05em;
 }
 
-/* === API KEY MODAL === */
-#api-key-modal.active {
-  display: flex;
-}
-
 /* === MOBILE RESPONSIVE === */
 @media (max-width: 767px) {
   #sidebar {

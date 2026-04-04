@@ -85,18 +85,6 @@
       nav.appendChild(item);
     });
 
-    // API key button at bottom of nav
-    const keyBtn = document.createElement('div');
-    keyBtn.className = 'chapter-nav-item mt-4 border-t border-white/10 pt-4';
-    keyBtn.innerHTML = `
-      <span class="status-indicator">🔑</span>
-      <div class="leading-tight text-[13px]">${window.LaunchpadAPI.hasApiKey() ? 'Change API Key' : 'Set API Key'}</div>
-    `;
-    keyBtn.addEventListener('click', () => {
-      showApiKeyModal();
-      closeMobileSidebar();
-    });
-    nav.appendChild(keyBtn);
   }
 
   // === Navigation ===
@@ -145,20 +133,6 @@
     document.getElementById('menu-icon-close').classList.add('hidden');
   }
 
-  // === API Key Modal ===
-
-  function showApiKeyModal() {
-    const modal = document.getElementById('api-key-modal');
-    const input = document.getElementById('api-key-input');
-    modal.classList.add('active');
-    input.value = '';
-    input.focus();
-  }
-
-  function hideApiKeyModal() {
-    document.getElementById('api-key-modal').classList.remove('active');
-  }
-
   // === Toast ===
 
   function showToast(message) {
@@ -187,32 +161,8 @@
 
     document.getElementById('sidebar-overlay').addEventListener('click', closeMobileSidebar);
 
-    // API key modal handlers
-    document.getElementById('api-key-save').addEventListener('click', () => {
-      const key = document.getElementById('api-key-input').value.trim();
-      if (key) {
-        window.LaunchpadAPI.setApiKey(key);
-        hideApiKeyModal();
-        renderSidebar();
-        showToast('API key saved!');
-      }
-    });
-
-    document.getElementById('api-key-skip').addEventListener('click', hideApiKeyModal);
-
-    document.getElementById('api-key-input').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        document.getElementById('api-key-save').click();
-      }
-    });
-
     // Render sidebar
     renderSidebar();
-
-    // Show API key modal if no key set
-    if (!window.LaunchpadAPI.hasApiKey()) {
-      showApiKeyModal();
-    }
 
     // Navigate to first incomplete chapter
     const progress = getProgress();
@@ -237,7 +187,6 @@
     navigateToChapter,
     isChapterUnlocked,
     showToast,
-    showApiKeyModal,
   };
 
   document.addEventListener('DOMContentLoaded', init);
