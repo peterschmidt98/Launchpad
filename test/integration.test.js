@@ -168,18 +168,15 @@ describe('Chapter 5 & 6 stubs', () => {
   describe('Chapter 5: Getting Things Done', () => {
     beforeEach(() => { app.navigateToChapter(5); });
 
-    it('displays Coming Soon badge', () => {
-      assert.ok(container.textContent.includes('Coming Soon'));
-    });
-
     it('displays title', () => {
       assert.ok(container.textContent.includes('Getting Things Done'));
     });
 
-    it('shows teaser content about Trello, Notion, Asana', () => {
+    it('renders full content with tool cards', () => {
       assert.ok(container.textContent.includes('Trello'));
       assert.ok(container.textContent.includes('Notion'));
       assert.ok(container.textContent.includes('Asana'));
+      assert.ok(container.textContent.includes('Monday.com'));
     });
 
     it('shows time estimate', () => {
