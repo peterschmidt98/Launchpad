@@ -533,6 +533,25 @@ body {
   }
 }
 
+/* === GRADUATION === */
+.skill-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #EEF2FF;
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.graduation-card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px 32px;
+  box-shadow: 0 4px 24px rgba(55, 48, 163, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  border: 2px solid rgba(55, 48, 163, 0.1);
+}
+
 /* === TOAST === */
 .toast {
   position: fixed;
