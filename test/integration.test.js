@@ -187,17 +187,13 @@ describe('Chapter 5 & 6 stubs', () => {
   describe('Chapter 6: You\'re Ready', () => {
     beforeEach(() => { app.navigateToChapter(6); });
 
-    it('displays Coming Soon badge', () => {
-      assert.ok(container.textContent.includes('Coming Soon'));
-    });
-
     it('displays title', () => {
       assert.ok(container.textContent.includes("You're Ready"));
     });
 
-    it('shows teaser content about CV and action plan', () => {
-      assert.ok(container.textContent.includes('CV'));
-      assert.ok(container.textContent.includes('action plan'));
+    it('renders full content with job listing decode', () => {
+      assert.ok(container.textContent.includes('Decode the job listing'));
+      assert.ok(container.textContent.includes('GreenLeaf'));
     });
 
     it('shows time estimate', () => {
