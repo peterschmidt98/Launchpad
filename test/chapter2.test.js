@@ -208,11 +208,11 @@ describe('Chapter 2: What is AI?', () => {
       assert.ok(container.textContent.includes('Spreadsheets'));
     });
 
-    it('chapter 4 shows coming soon content', () => {
+    it('chapter 4 renders full content after unlock', () => {
       app.setChapterStatus(2, 'complete');
       app.navigateToChapter(4);
       assert.ok(container.textContent.includes('Talking to AI'));
-      assert.ok(container.textContent.includes('Coming Soon'));
+      assert.ok(container.textContent.includes('prompt formula'));
     });
 
     it('chapter 5 shows coming soon content', () => {
