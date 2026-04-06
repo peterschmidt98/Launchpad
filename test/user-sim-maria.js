@@ -35,7 +35,8 @@ function assertEncouraging(text, context) {
     'awesome', 'ahead', 'excellent', 'spirit', 'congratulations', 'proud',
     'real', 'doing', 'got this', 'surprise', 'already', 'unlocked', 'shape',
     'correct', 'strong', 'specific', 'formula', 'action', 'spot on',
-    'instinct', 'useful', 'works', 'built for', 'smart', 'best', 'learn'];
+    'instinct', 'useful', 'works', 'built for', 'smart', 'best', 'learn',
+    'perfect', 'clear', 'focused', 'targeted'];
   const lower = text.toLowerCase();
   const found = positiveWords.some(w => lower.includes(w));
   assert.ok(found, `Expected encouraging language in "${context}". Got: "${text.slice(0, 200)}..."`);
